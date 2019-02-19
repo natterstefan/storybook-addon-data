@@ -1,0 +1,8 @@
+**/dist
+**/es
+**/esm
+**/lib
+**/node_modules
+
+packages/storybook-data-json/index.js
+packages/storybook-data-json/register.js

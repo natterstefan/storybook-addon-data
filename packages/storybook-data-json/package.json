@@ -1,0 +1,20 @@
+{
+  "name": "storybook-data-json",
+  "version": "0.1.0",
+  "description": "Present a component's properties in Storybook.",
+  "author": "Stefan Natter (http://natterstefan.me)",
+  "license": "MIT",
+  "main": "index.js",
+  "files": ["index.js", "register.js"],
+  "scripts": {
+    "build": "NODE_ENV=production babel src --ignore */*.test.js,**/*.test.js,*/*.stories.js,**/stories.js -d ./",
+    "prepublish": "npm run build",
+    "lint": "eslint src",
+    "watch": "NODE_ENV=production babel -d ./ ./src --watch"
+  },
+  "dependencies": {
+    "@storybook/addons": "^4.1.12",
+    "react": "^16.8.2",
+    "styled-components": "^4.1.3"
+  }
+}

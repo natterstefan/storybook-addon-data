@@ -1,0 +1,25 @@
+{
+  "name": "storybook-data-json-example",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Present a component's properties in Storybook - Example app",
+  "author": "Stefan Natter (http://natterstefan.me)",
+  "license": "MIT",
+  "scripts": {
+    "start": "start-storybook -p 9001 -c .storybook --ci"
+  },
+  "dependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
+    "@storybook/addon-actions": "^4.1.12",
+    "@storybook/addon-options": "^4.1.12",
+    "@storybook/addons": "^4.1.12",
+    "@storybook/react": "^4.1.12",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.0.5",
+    "react": "^16.8.2",
+    "react-scripts": "^2.1.5",
+    "storybook-data-json": "^0.1.0",
+    "styled-components": "^4.1.3"
+  }
+}

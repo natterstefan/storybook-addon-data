@@ -1,0 +1,12 @@
+.DS_Store
+node_modules
+*.log
+tmp
+
+# build
+*.tgz
+/packages/storybook-data-json/index.js
+/packages/storybook-data-json/register.js
+
+# tests
+coverage

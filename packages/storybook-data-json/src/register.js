@@ -1,11 +1,26 @@
+/* eslint-disable react/no-danger */
 import React, { Fragment } from 'react'
 import addons from '@storybook/addons'
 import styled from 'styled-components'
+
+// inspired by
+// - https://github.com/storybooks/addon-jsx/blob/1a95e61290cd2f68bc2909c5bc8f7adc79345097/src/jsx.js
+// - https://codepen.io/eksch/pen/jukqf?editors=1010
+import Prism from './prism'
+import globalStyle from './css'
+
+const prismStyle = document.createElement('style')
+prismStyle.innerHTML = globalStyle
+document.body.appendChild(prismStyle)
 
 const NotesPanel = styled.div({
   margin: 10,
   width: '100%',
   overflow: 'auto',
+})
+
+const PreBlock = styled.pre({
+  margin: '20px !important', // overwrite prims.js styling
 })
 
 class Notes extends React.Component {
@@ -49,13 +64,23 @@ class Notes extends React.Component {
     const { data, text } = this.state
     const { active } = this.props
     const textAfterFormatted = text ? text.trim().replace(/\n/g, '<br />') : ''
+    let code = ''
+
+    try {
+      code = Prism.highlight(JSON.stringify(data), Prism.languages.javascript)
+    } catch (error) {
+      // do nothing right now, just report
+      console.error(error)
+    }
 
     return active ? (
       <Fragment>
         <NotesPanel dangerouslySetInnerHTML={{ __html: textAfterFormatted }} />
-        <NotesPanel
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-        />
+        {code && (
+          <PreBlock className="language-json">
+            <code dangerouslySetInnerHTML={{ __html: code }} />
+          </PreBlock>
+        )}
       </Fragment>
     ) : null
   }

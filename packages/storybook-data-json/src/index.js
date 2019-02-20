@@ -5,8 +5,8 @@ const withDataJson = data =>
   makeDecorator({
     name: 'withDataJson',
     parameterName: 'notes',
-    // This means don't run this decorator if the notes decorator is not set
-    skipIfNoParametersOrOptions: true,
+    // This means still run this decorator if the notes decorator is not set
+    skipIfNoParametersOrOptions: false,
     // NOTE: getStory() contains the currently rendered node-tree (and it's props)
     wrapper: (getStory, context, { parameters }) => {
       // Our simple API above simply sets the notes parameter to a string,

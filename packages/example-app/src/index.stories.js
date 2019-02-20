@@ -21,6 +21,11 @@ storiesOf('Button', module)
       notes: 'This is a very simple Button and you can click on it.',
     },
   )
+  .add('without description', () => (
+    <Button {...data} onClick={action('clicked')}>
+      Hello Button
+    </Button>
+  ))
   .add(
     'with some emoji',
     () => (

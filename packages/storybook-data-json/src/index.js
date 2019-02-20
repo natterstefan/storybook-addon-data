@@ -12,7 +12,11 @@ const withDataJson = data =>
       // Our simple API above simply sets the notes parameter to a string,
       // which we send to the channels
       const channel = addons.getChannel()
-      channel.emit('MYADDON/add_notes', { parameters, data, story: getStory() })
+      channel.emit('natterstefan/storybook-data-json/init', {
+        parameters,
+        data,
+        story: getStory(),
+      })
 
       return getStory(context)
     },

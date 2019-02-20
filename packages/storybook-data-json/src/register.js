@@ -33,7 +33,7 @@ class Notes extends React.Component {
   componentDidMount() {
     const { channel, api } = this.props
     // Listen to the notes and render it.
-    channel.on('MYADDON/add_notes', this.onAddNotes)
+    channel.on('natterstefan/storybook-data-json/init', this.onAddNotes)
 
     // Clear the current notes on every story change.
     this.stopListeningOnStory = api.onStory(() => {
@@ -52,7 +52,10 @@ class Notes extends React.Component {
 
     this.unmounted = true
     const { channel } = this.props
-    channel.removeListener('MYADDON/add_notes', this.onAddNotes)
+    channel.removeListener(
+      'natterstefan/storybook-data-json/init',
+      this.onAddNotes,
+    )
   }
 
   onAddNotes(options) {
@@ -109,9 +112,9 @@ class Notes extends React.Component {
 }
 
 // Register the addon with a unique name.
-addons.register('MYADDON', api => {
+addons.register('natterstefan/storybook-data-json', api => {
   // Also need to set a unique name to the panel.
-  addons.addPanel('MYADDON/panel', {
+  addons.addPanel('natterstefan/storybook-data-json/panel', {
     title: 'Data',
     render: ({ active }) => (
       <Notes channel={addons.getChannel()} api={api} active={active} />

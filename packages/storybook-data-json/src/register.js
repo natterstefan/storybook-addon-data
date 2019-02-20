@@ -15,20 +15,16 @@ document.body.appendChild(prismStyle)
 
 const NotesPanel = styled.div({
   margin: 10,
-  width: '100%',
   overflow: 'auto',
-})
-
-const PreBlock = styled.pre({
-  margin: '20px !important', // overwrite prims.js styling
 })
 
 class Notes extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      text: '',
       data: {},
+      story: {},
+      text: '',
     }
 
     this.onAddNotes = this.onAddNotes.bind(this)
@@ -43,6 +39,9 @@ class Notes extends React.Component {
     this.stopListeningOnStory = api.onStory(() => {
       this.onAddNotes('')
     })
+
+    // init prism properly
+    Prism.highlightAll()
   }
 
   // This is some cleanup tasks when the Notes panel is unmounting.
@@ -57,32 +56,55 @@ class Notes extends React.Component {
   }
 
   onAddNotes(options) {
-    this.setState({ text: options.parameters, data: options.data })
+    this.setState({
+      text: options.parameters,
+      data: options.data,
+      story: options.story,
+    })
   }
 
   render() {
-    const { data, text } = this.state
+    // eslint-disable-next-line
+    const { data, story, text } = this.state
     const { active } = this.props
+    if (!data || !active) {
+      return null
+    }
+
     const textAfterFormatted = text ? text.trim().replace(/\n/g, '<br />') : ''
     let code = ''
 
-    try {
-      code = Prism.highlight(JSON.stringify(data), Prism.languages.javascript)
-    } catch (error) {
-      // do nothing right now, just report
-      console.error(error)
+    if (data.data) {
+      try {
+        code = Prism.highlight(
+          JSON.stringify(data.data, null, 2),
+          Prism.languages[data.type],
+        )
+      } catch (error) {
+        // do nothing right now, just report
+        console.error(error) // eslint-disable-line
+      }
     }
 
-    return active ? (
-      <Fragment>
-        <NotesPanel dangerouslySetInnerHTML={{ __html: textAfterFormatted }} />
-        {code && (
-          <PreBlock className="language-json">
-            <code dangerouslySetInnerHTML={{ __html: code }} />
-          </PreBlock>
+    return (
+      <NotesPanel>
+        {textAfterFormatted && (
+          <Fragment>
+            <h2>Notes</h2>
+            <div dangerouslySetInnerHTML={{ __html: textAfterFormatted }} />
+          </Fragment>
         )}
-      </Fragment>
-    ) : null
+        {code && (
+          <Fragment>
+            <h2>{data.name}</h2>
+            <pre className={`language-${data.type} line-numbers`}>
+              <code dangerouslySetInnerHTML={{ __html: code }} />
+              {}
+            </pre>
+          </Fragment>
+        )}
+      </NotesPanel>
+    )
   }
 }
 
@@ -90,7 +112,7 @@ class Notes extends React.Component {
 addons.register('MYADDON', api => {
   // Also need to set a unique name to the panel.
   addons.addPanel('MYADDON/panel', {
-    title: 'Notes',
+    title: 'Data',
     render: ({ active }) => (
       <Notes channel={addons.getChannel()} api={api} active={active} />
     ),

@@ -66,6 +66,13 @@ class Notes extends React.Component {
     })
   }
 
+  highlight(data) {
+    return Prism.highlight(
+      JSON.stringify(data.data, null, 2),
+      Prism.languages[data.type],
+    )
+  }
+
   render() {
     // eslint-disable-next-line
     const { data, story, text } = this.state
@@ -76,17 +83,13 @@ class Notes extends React.Component {
 
     const textAfterFormatted = text ? text.trim().replace(/\n/g, '<br />') : ''
     let code = ''
-
-    if (data.data) {
-      try {
-        code = Prism.highlight(
-          JSON.stringify(data.data, null, 2),
-          Prism.languages[data.type],
-        )
-      } catch (error) {
-        // do nothing right now, just report
-        console.error(error) // eslint-disable-line
+    try {
+      if (Array.isArray(data)) {
+        code = data.map(d => this.highlight(d))
       }
+    } catch (error) {
+      // do nothing right now, just report
+      console.error(error) // eslint-disable-line
     }
 
     return (
@@ -97,15 +100,15 @@ class Notes extends React.Component {
             <div dangerouslySetInnerHTML={{ __html: textAfterFormatted }} />
           </Fragment>
         )}
-        {code && (
-          <Fragment>
-            <h2>{data.name}</h2>
-            <pre className={`language-${data.type} line-numbers`}>
-              <code dangerouslySetInnerHTML={{ __html: code }} />
-              {}
-            </pre>
-          </Fragment>
-        )}
+        {code &&
+          code.map((c, idx) => (
+            <Fragment key={data[idx].name}>
+              <h2>{data[idx].name}</h2>
+              <pre className={`language-${data[idx].type} line-numbers`}>
+                <code dangerouslySetInnerHTML={{ __html: c }} />
+              </pre>
+            </Fragment>
+          ))}
       </NotesPanel>
     )
   }

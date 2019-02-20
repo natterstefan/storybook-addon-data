@@ -1,6 +1,6 @@
 export default `
 /* PrismJS 1.15.0
-https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+json+jsx&plugins=line-numbers */
+https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+graphql+json+jsx&plugins=line-numbers */
 /**
  * prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
  * Based on https://github.com/chriskempson/tomorrow-theme

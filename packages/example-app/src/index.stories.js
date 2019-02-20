@@ -9,7 +9,7 @@ import Button from '.'
 import withDataJson from 'storybook-data-json' // eslint-disable-line
 
 storiesOf('Button', module)
-  .addDecorator(withDataJson({ name: 'data.json', type: 'json', data })) // TODO: document available types
+  .addDecorator(withDataJson([{ name: 'data.json', type: 'json', data }])) // TODO: document available types
   .add(
     'with text',
     () => (

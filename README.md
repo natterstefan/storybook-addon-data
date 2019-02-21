@@ -1,9 +1,9 @@
-# Storybook-Data-JSON Addon
+# storybook-addon-data
 
-[![Dependencies](https://img.shields.io/david/natterstefan/storybook-data-json.svg)](https://github.com/natterstefan/storybook-data-json/blob/master/package.json)
-[![DevDependencies](https://img.shields.io/david/dev/natterstefan/storybook-data-json.svg)](https://github.com/natterstefan/storybook-data-json/blob/master/package.json)
-[![Known Vulnerabilities](https://snyk.io/test/github/natterstefan/storybook-data-json/badge.svg)](https://snyk.io/test/github/natterstefan/storybook-data-json)
-[![GitHub license](https://img.shields.io/github/license/natterstefan/storybook-data-json.svg)](https://github.com/natterstefan/storybook-data-json/blob/master/LICENCE)
+[![Dependencies](https://img.shields.io/david/natterstefan/storybook-addon-data.svg)](https://github.com/natterstefan/storybook-addon-data/blob/master/package.json)
+[![DevDependencies](https://img.shields.io/david/dev/natterstefan/storybook-addon-data.svg)](https://github.com/natterstefan/storybook-addon-data/blob/master/package.json)
+[![Known Vulnerabilities](https://snyk.io/test/github/natterstefan/storybook-addon-data/badge.svg)](https://snyk.io/test/github/natterstefan/storybook-addon-data)
+[![GitHub license](https://img.shields.io/github/license/natterstefan/storybook-addon-data.svg)](https://github.com/natterstefan/storybook-addon-data/blob/master/LICENCE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 Present a component's properties in Storybook.
@@ -11,7 +11,7 @@ Present a component's properties in Storybook.
 ## Getting started
 
 ```bash
-npm i storybook-data-json --save
+npm i storybook-addon-data --save
 ```
 
 ## Basic Usage
@@ -21,7 +21,7 @@ npm i storybook-data-json --save
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import withDataJson from 'storybook-data-json'
+import withDataJson from 'storybook-addon-data'
 
 import dataJson from './data.json'
 

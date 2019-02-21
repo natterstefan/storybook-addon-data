@@ -4,9 +4,9 @@
 **/lib
 **/node_modules
 
-packages/storybook-data-json/css.js
-packages/storybook-data-json/src/css.js
-packages/storybook-data-json/prism.js
-packages/storybook-data-json/src/prism.js
-packages/storybook-data-json/index.js
-packages/storybook-data-json/register.js
+packages/storybook-addon-data/css.js
+packages/storybook-addon-data/src/css.js
+packages/storybook-addon-data/prism.js
+packages/storybook-addon-data/src/prism.js
+packages/storybook-addon-data/index.js
+packages/storybook-addon-data/register.js

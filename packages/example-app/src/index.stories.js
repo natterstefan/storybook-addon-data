@@ -1,7 +1,8 @@
+/* eslint-disable import/order */
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import withDataJson from 'storybook-data-json'
+import withDataJson from 'storybook-addon-data'
 
 /**
  * created with

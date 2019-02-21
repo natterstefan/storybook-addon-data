@@ -17,9 +17,9 @@
     "@storybook/react": "^4.1.12",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.5",
-    "react": "^16.8.2",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
+    "react": "^16.8.2",
     "react-scripts": "^2.1.5",
     "storybook-addon-data": "^0.1.0",
     "styled-components": "^4.1.3"

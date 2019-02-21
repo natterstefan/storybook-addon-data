@@ -25,31 +25,15 @@ storiesOf('Button', module)
   )
   .add(
     'with text',
-    () => (
-      <Button {...dataJson} onClick={action('clicked')}>
-        Hello Button
-      </Button>
-    ),
+    () => <Button {...dataJson} onClick={action('clicked')} />,
     {
       notes: 'This is a very simple Button and you can click on it.',
     },
   )
   .add('without description', () => (
-    <Button {...dataJson} onClick={action('clicked')}>
-      Hello Button
-    </Button>
+    <Button {...dataJson} onClick={action('clicked')} />
   ))
-  .add(
-    'with some emoji',
-    () => (
-      <Button {...dataJson} onClick={action('clicked')}>
-        <span role="img" aria-label="so cool">
-          😀 😎 👍 💯
-        </span>
-      </Button>
-    ),
-    {
-      notes:
-        'Here we use some emoji as the Button text. Doesn&apos;t it look nice?',
-    },
-  )
+
+storiesOf('Button', module).add('without data', () => (
+  <Button {...dataJson} onClick={action('clicked')} />
+))

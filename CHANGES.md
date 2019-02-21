@@ -6,6 +6,9 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### Added
+
+- [PrismJS](https://prismjs.com/) support
 - initial setup with a basic addon based on and inspired by
   - [Writing Addons](https://storybook.js.org/addons/writing-addons/)
   - [storybook-addon-code](https://github.com/SOFTVISION-University/storybook-addon-code)

@@ -17,6 +17,7 @@
     "lint-js": "eslint ./packages",
     "lint-md": "remark .",
     "postinstall": "yarn bootstrap",
+    "prebuild": "copyfiles README.md packages/storybook-data-json",
     "prepublishOnly": "copyfiles README.md packages/storybook-data-json",
     "publish": "lern publish",
     "start": "(cd packages/example-app && yarn start)",

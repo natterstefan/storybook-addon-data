@@ -34,5 +34,6 @@
     "graphql": "^14.1.1",
     "react": "^16.8.2",
     "styled-components": "^4.1.3"
-  }
+  },
+  "gitHead": "94ff6fefd77a80750ba7a8d2d9c45a87e8b6d286"
 }

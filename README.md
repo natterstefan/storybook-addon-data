@@ -30,9 +30,8 @@ import Card from '.'
 storiesOf('Button', module)
   .addDecorator(
     withDataJson([
+       // also supported: javascript and graphql
       { name: 'data.json', type: 'json', data: dataJson },
-      { name: 'data.js', type: 'javascript', data: dataJs },
-      { name: 'data.gql', type: 'graphql', data: dataGql },
     ]),
   )
   .add(
@@ -54,6 +53,11 @@ And the `data.json`:
   "title": "Click Me"
 }
 ```
+
+The result will look similar to (Note: in the example I used also a `.js` and
+`.gql` file):
+
+![Example](./static/images/example.png)
 
 ## Development - Getting started
 

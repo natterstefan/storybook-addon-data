@@ -17,6 +17,7 @@
     "lint-js": "eslint ./packages",
     "lint-md": "remark .",
     "postinstall": "yarn bootstrap",
+    "prebuild": "copyfiles README.md packages/storybook-data-json",
     "prepublishOnly": "copyfiles README.md packages/storybook-data-json",
     "publish": "lern publish",
     "start": "(cd packages/example-app && yarn start)",
@@ -38,16 +39,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/natterstefan/react-component-library-lerna.git"
+    "url": "git+https://github.com/natterstefan/storybook-data-json.git"
   },
   "workspaces": {
     "packages": ["packages/*"]
   },
   "keywords": ["storybook", "storybook-addon"],
   "bugs": {
-    "url": "https://github.com/natterstefan/react-component-library-lerna/issues"
+    "url": "https://github.com/natterstefan/storybook-data-json/issues"
   },
-  "homepage": "https://github.com/natterstefan/react-component-library-lerna#readme",
+  "homepage": "https://github.com/natterstefan/storybook-data-json#readme",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",

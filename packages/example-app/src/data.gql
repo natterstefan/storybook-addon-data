@@ -1,0 +1,5 @@
+query Node {
+  node(id: "1000") {
+    title
+  }
+}

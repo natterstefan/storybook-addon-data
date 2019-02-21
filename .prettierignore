@@ -1,1 +1,6 @@
 package.json
+
+packages/storybook-data-json/css.js
+packages/storybook-data-json/src/css.js
+packages/storybook-data-json/prism.js
+packages/storybook-data-json/src/prism.js

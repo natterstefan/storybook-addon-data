@@ -10,6 +10,57 @@ Present a component's properties in Storybook.
 
 ## Getting started
 
+```bash
+npm i storybook-data-json --save
+```
+
+## Basic Usage
+
+```js
+// index.stories.js
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
+import withDataJson from 'storybook-data-json'
+
+import dataJson from './data.json'
+
+import Card from '.'
+
+storiesOf('Button', module)
+  .addDecorator(
+    withDataJson([
+       // also supported: javascript and graphql
+      { name: 'data.json', type: 'json', data: dataJson },
+    ]),
+  )
+  .add(
+    'with text',
+    () => <Button {...dataJson} onClick={action('clicked')} />,
+    {
+      notes: 'This is a very simple Button and you can click on it.',
+    },
+  )
+  .add('without description', () => (
+    <Button {...dataJson} onClick={action('clicked')} />
+  ))
+```
+
+And the `data.json`:
+
+```json
+{
+  "title": "Click Me"
+}
+```
+
+The result will look similar to (Note: in the example I used also a `.js` and
+`.gql` file):
+
+![Example](./static/images/example.png)
+
+## Development - Getting started
+
 Use `yarn` instead of `npm`, because we rely on [`yarn`'s `workspaces` feature](https://yarnpkg.com/lang/en/docs/workspaces/).
 
 ```bash

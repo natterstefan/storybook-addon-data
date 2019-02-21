@@ -6,6 +6,7 @@ tmp
 # build
 *.tgz
 /packages/storybook-data-json/*.js
+packages/storybook-data-json/README.md
 
 # tests
 coverage

@@ -1,6 +1,6 @@
 {
-  "name": "storybook-data-json",
-  "version": "0.0.1",
+  "name": "storybook-addon-data",
+  "version": "0.1.0",
   "description": "Present a component's properties in Storybook.",
   "author": "Stefan Natter (http://natterstefan.me)",
   "license": "MIT",
@@ -17,8 +17,8 @@
     "lint-js": "eslint ./packages",
     "lint-md": "remark .",
     "postinstall": "yarn bootstrap",
-    "prebuild": "copyfiles README.md packages/storybook-data-json",
-    "prepublishOnly": "copyfiles README.md packages/storybook-data-json",
+    "prebuild": "copyfiles README.md packages/storybook-addon-data",
+    "prepublishOnly": "yarn build && copyfiles README.md packages/storybook-addon-data",
     "publish": "lern publish",
     "start": "(cd packages/example-app && yarn start)",
     "test": "echo 'INFO: not implemented yet' && exit 1",
@@ -39,16 +39,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/natterstefan/storybook-data-json.git"
+    "url": "git+https://github.com/natterstefan/storybook-addon-data.git"
   },
   "workspaces": {
     "packages": ["packages/*"]
   },
   "keywords": ["storybook", "storybook-addon"],
   "bugs": {
-    "url": "https://github.com/natterstefan/storybook-data-json/issues"
+    "url": "https://github.com/natterstefan/storybook-addon-data/issues"
   },
-  "homepage": "https://github.com/natterstefan/storybook-data-json#readme",
+  "homepage": "https://github.com/natterstefan/storybook-addon-data#readme",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",

@@ -1,17 +1,26 @@
 {
-  "name": "storybook-data-json",
+  "name": "storybook-addon-data",
   "version": "0.1.0",
   "description": "Present a component's properties in Storybook.",
   "author": "Stefan Natter (http://natterstefan.me)",
   "license": "MIT",
   "main": "index.js",
-  "files": ["index.js", "register.js"],
+  "files": ["css.js", "index.js", "prism.js", "register.js"],
   "scripts": {
     "build": "NODE_ENV=production babel src --ignore */*.test.js,**/*.test.js,*/*.stories.js,**/stories.js -d ./",
     "prepublish": "npm run build",
     "lint": "eslint src",
     "watch": "NODE_ENV=production babel -d ./ ./src --watch"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natterstefan/storybook-addon-data.git"
+  },
+  "keywords": ["storybook", "storybook-addon"],
+  "bugs": {
+    "url": "https://github.com/natterstefan/storybook-addon-data/issues"
+  },
+  "homepage": "https://github.com/natterstefan/storybook-addon-data#readme",
   "dependencies": {
     "@storybook/addons": "^4.1.12",
     "react": "^16.8.2",

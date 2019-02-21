@@ -1,5 +1,5 @@
 {
-  "name": "storybook-data-json-example",
+  "name": "storybook-addon-data-example",
   "version": "0.1.0",
   "private": true,
   "description": "Present a component's properties in Storybook - Example app",
@@ -21,7 +21,7 @@
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "react-scripts": "^2.1.5",
-    "storybook-data-json": "^0.1.0",
+    "storybook-addon-data": "^0.1.0",
     "styled-components": "^4.1.3"
   }
 }

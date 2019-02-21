@@ -5,8 +5,13 @@ tmp
 
 # build
 *.tgz
-/packages/storybook-data-json/*.js
-packages/storybook-data-json/README.md
+packages/storybook-addon-data/css.js
+packages/storybook-addon-data/src/css.js
+packages/storybook-addon-data/prism.js
+packages/storybook-addon-data/src/prism.js
+packages/storybook-addon-data/index.js
+packages/storybook-addon-data/register.js
+packages/storybook-addon-data/README.md
 
 # tests
 coverage

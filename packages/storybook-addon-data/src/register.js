@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import addons from '@storybook/addons'
 import styled from 'styled-components'
 /**
@@ -43,8 +43,8 @@ import { print } from 'graphql/language/printer'
  * - https://github.com/storybooks/addon-jsx/blob/1a95e61290cd2f68bc2909c5bc8f7adc79345097/src/jsx.js
  * - https://codepen.io/eksch/pen/jukqf?editors=1010
  */
-import Prism from './prism'
-import globalStyle from './css'
+import Prism from './vendor/prism'
+import globalStyle from './vendor/css'
 
 const prismStyle = document.createElement('style')
 prismStyle.innerHTML = globalStyle
@@ -55,112 +55,95 @@ const NotesPanel = styled.div({
   overflow: 'auto',
 })
 
-class Notes extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: {},
-      text: '',
-    }
+const highlightCode = data => {
+  // 2 => space parameter
+  // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#Der_space_Parameter
+  let preparedData = ''
 
-    this.onAddNotes = this.onAddNotes.bind(this)
+  switch (data.type) {
+    case 'graphql':
+      // https://github.com/apollographql/graphql-tag/issues/144#issuecomment-360866112
+      preparedData = print(data.data)
+      break
+
+    case 'json':
+      preparedData = JSON.stringify(data.data, null, 2)
+      break
+
+    default:
+      preparedData = data.data
   }
 
-  componentDidMount() {
-    const { channel, api } = this.props
-    // Listen to the notes and render it.
-    channel.on('natterstefan/storybook-addon-data/init', this.onAddNotes)
+  return Prism.highlight(preparedData, Prism.languages[data.type])
+}
 
-    // Clear the current notes on every story change.
-    this.stopListeningOnStory = api.onStory(() => {
-      this.onAddNotes('')
-    })
+const Notes = ({ api, active, channel }) => {
+  const [data, setData] = useState({})
+  const [text, setText] = useState('')
+  let stopListeningOnStory = null
 
+  const onInit = options => {
+    setData(options.data)
+    setText(options.parameters)
+  }
+
+  useEffect(() => {
     // init prism properly
     Prism.highlightAll()
-  }
+  }, [])
 
-  // This is some cleanup tasks when the Notes panel is unmounting.
-  componentWillUnmount() {
-    if (this.stopListeningOnStory) {
-      this.stopListeningOnStory()
-    }
+  useEffect(() => {
+    // Listen to the notes and render it.
+    channel.on('natterstefan/storybook-addon-data/init', onInit)
 
-    this.unmounted = true
-    const { channel } = this.props
-    channel.removeListener(
-      'natterstefan/storybook-addon-data/init',
-      this.onAddNotes,
-    )
-  }
-
-  onAddNotes(options) {
-    this.setState({
-      text: options.parameters,
-      data: options.data,
+    // Clear the current data on every story change.
+    stopListeningOnStory = api.onStory(() => {
+      onInit({})
     })
+
+    // This is some cleanup tasks when the Data panel is unmounting.
+    return () => {
+      if (stopListeningOnStory) {
+        stopListeningOnStory()
+      }
+
+      channel.removeListener('natterstefan/storybook-addon-data/init', onInit)
+    }
+  }, [])
+
+  if (!data || !active) {
+    // do not render when tab is not active
+    return null
   }
 
-  highlightCode(data) {
-    // 2 => space parameter
-    // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#Der_space_Parameter
-    let preparedData = ''
-
-    switch (data.type) {
-      case 'graphql':
-        // https://github.com/apollographql/graphql-tag/issues/144#issuecomment-360866112
-        preparedData = print(data.data)
-        break
-
-      case 'json':
-        preparedData = JSON.stringify(data.data, null, 2)
-        break
-
-      default:
-        preparedData = data.data
-    }
-
-    return Prism.highlight(preparedData, Prism.languages[data.type])
+  const textAfterFormatted = text ? text.trim().replace(/\n/g, '<br />') : ''
+  let code = ''
+  try {
+    code = data.length && data.map(d => highlightCode(d))
+  } catch (error) {
+    // do nothing right now, just report
+    console.error(error) // eslint-disable-line
   }
 
-  render() {
-    const { data, text } = this.state
-    const { active } = this.props
-
-    if (!data || !active) {
-      // do not render when tab is not active
-      return null
-    }
-
-    const textAfterFormatted = text ? text.trim().replace(/\n/g, '<br />') : ''
-    let code = ''
-    try {
-      code = data.length && data.map(d => this.highlightCode(d))
-    } catch (error) {
-      // do nothing right now, just report
-      console.error(error) // eslint-disable-line
-    }
-
-    return (
-      <NotesPanel>
-        {textAfterFormatted && (
-          <Fragment>
-            <h2>Notes</h2>
-            <div dangerouslySetInnerHTML={{ __html: textAfterFormatted }} />
+  return (
+    <NotesPanel>
+      {textAfterFormatted && (
+        <Fragment>
+          <h2>Notes</h2>
+          <div dangerouslySetInnerHTML={{ __html: textAfterFormatted }} />
+        </Fragment>
+      )}
+      {code &&
+        code.map((c, idx) => (
+          <Fragment key={data[idx].name}>
+            <h2>{data[idx].name}</h2>
+            <pre className={`language-${data[idx].type} line-numbers`}>
+              <code dangerouslySetInnerHTML={{ __html: c }} />
+            </pre>
           </Fragment>
-        )}
-        {code &&
-          code.map((c, idx) => (
-            <Fragment key={data[idx].name}>
-              <h2>{data[idx].name}</h2>
-              <pre className={`language-${data[idx].type} line-numbers`}>
-                <code dangerouslySetInnerHTML={{ __html: c }} />
-              </pre>
-            </Fragment>
-          ))}
-      </NotesPanel>
-    )
-  }
+        ))}
+    </NotesPanel>
+  )
 }
 
 // Register the addon with a unique name.

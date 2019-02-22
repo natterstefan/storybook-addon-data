@@ -1,6 +1,4 @@
 package.json
 
-packages/storybook-addon-data/css.js
-packages/storybook-addon-data/src/css.js
-packages/storybook-addon-data/prism.js
-packages/storybook-addon-data/src/prism.js
+packages/storybook-addon-data/vendor/*.js
+packages/storybook-addon-data/src/vendor/*.js

@@ -6,6 +6,11 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
+### Added
+
+- first draft of the `withDataWrapper` (HoC) implemented, as a first alternative
+  to the existing decorator
+
 ### Changed
 
 - Upgraded packages (non-breaking)

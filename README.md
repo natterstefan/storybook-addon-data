@@ -17,11 +17,16 @@ npm i storybook-addon-data --save
 ## Basic Usage
 
 ```js
+// .storybook/addons.js
+import 'storybook-addon-data/register'
+```
+
+```js
 // index.stories.js
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import withDataJson from 'storybook-addon-data'
+import withData from 'storybook-addon-data'
 
 import dataJson from './data.json'
 
@@ -29,7 +34,7 @@ import Card from '.'
 
 storiesOf('Button', module)
   .addDecorator(
-    withDataJson([
+    withData([
        // also supported: javascript and graphql
       { name: 'data.json', type: 'json', data: dataJson },
     ]),

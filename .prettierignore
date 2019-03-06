@@ -2,3 +2,7 @@ package.json
 
 packages/storybook-addon-data/vendor/*.js
 packages/storybook-addon-data/src/vendor/*.js
+
+packages/storybook-addon-data/index.js
+packages/storybook-addon-data/constants.js
+packages/storybook-addon-data/register.js

@@ -45,6 +45,7 @@ import { print } from 'graphql/language/printer'
  */
 import Prism from './vendor/prism'
 import globalStyle from './vendor/css'
+import { ACTIONS, CONSTANTS } from './constants'
 
 const prismStyle = document.createElement('style')
 prismStyle.innerHTML = globalStyle
@@ -94,7 +95,7 @@ const Notes = ({ api, active, channel }) => {
 
   useEffect(() => {
     // Listen to the notes and render it.
-    channel.on('natterstefan/storybook-addon-data/init', onInit)
+    channel.on(ACTIONS.init, onInit)
 
     // Clear the current data on every story change.
     stopListeningOnStory = api.onStory(() => {
@@ -107,7 +108,7 @@ const Notes = ({ api, active, channel }) => {
         stopListeningOnStory()
       }
 
-      channel.removeListener('natterstefan/storybook-addon-data/init', onInit)
+      channel.removeListener(ACTIONS.init, onInit)
     }
   }, [])
 
@@ -116,7 +117,14 @@ const Notes = ({ api, active, channel }) => {
     return null
   }
 
-  const textAfterFormatted = text ? text.trim().replace(/\n/g, '<br />') : ''
+  let textAfterFormatted = ''
+  try {
+    textAfterFormatted = text ? text.trim().replace(/\n/g, '<br />') : ''
+  } catch (error) {
+    // do nothing right now, just report
+    console.error(error) // eslint-disable-line
+  }
+
   let code = ''
   try {
     code = data.length && data.map(d => highlightCode(d))
@@ -148,10 +156,10 @@ const Notes = ({ api, active, channel }) => {
 
 // Register the addon with a unique name.
 // https://storybook.js.org/addons/api/#addonapiregister
-addons.register('natterstefan/storybook-addon-data', api => {
+addons.register(CONSTANTS.addonName, api => {
   // Also need to set a unique name to the panel.
-  addons.addPanel('natterstefan/storybook-addon-data/panel', {
-    title: 'Data',
+  addons.addPanel(CONSTANTS.panelId, {
+    title: CONSTANTS.panelName,
     render: ({ active }) => (
       <Notes channel={addons.getChannel()} api={api} active={active} />
     ),

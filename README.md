@@ -76,7 +76,7 @@ yarn start # starts storybook (http://localhost:9001)
 
 ## Licence
 
-[MIT](LICENCE)
+[Apache 2.0](LICENCE)
 
 ## Maintainers
 

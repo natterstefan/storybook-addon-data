@@ -3,7 +3,7 @@
   "version": "0.3.1",
   "description": "Present a component's properties in Storybook.",
   "author": "Stefan Natter (http://natterstefan.me)",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "main": "index.js",
   "files": [
     "index.js",
@@ -30,10 +30,12 @@
   },
   "homepage": "https://github.com/natterstefan/storybook-addon-data#readme",
   "dependencies": {
-    "@storybook/addons": "^4.1.13",
     "graphql": "^14.1.1",
-    "react": "^16.8.3",
-    "styled-components": "^4.1.3"
+    "styled-components": "^4.2.0"
+  },
+  "peerDependencies": {
+    "@storybook/addons": "^4.1.16",
+    "react": "^16.8.3"
   },
   "gitHead": "94ff6fefd77a80750ba7a8d2d9c45a87e8b6d286"
 }

@@ -30,12 +30,12 @@
   },
   "homepage": "https://github.com/natterstefan/storybook-addon-data#readme",
   "dependencies": {
-    "graphql": "^14.1.1",
-    "styled-components": "^4.2.0"
+    "graphql": "^14.1.1"
   },
   "peerDependencies": {
-    "@storybook/addons": "^4.1.16",
-    "react": "^16.8.3"
+    "@storybook/addons": "^5.0.5",
+    "@storybook/core-events": "^5.0.5",
+    "react": "^16.8.5"
   },
   "gitHead": "94ff6fefd77a80750ba7a8d2d9c45a87e8b6d286"
 }

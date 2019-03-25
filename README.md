@@ -6,7 +6,7 @@
 [![GitHub license](https://img.shields.io/github/license/natterstefan/storybook-addon-data.svg)](https://github.com/natterstefan/storybook-addon-data/blob/master/LICENCE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-Present a component's properties in Storybook.
+Present a component's properties in Storybook@5.
 
 ## Getting started
 

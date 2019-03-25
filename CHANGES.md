@@ -9,6 +9,11 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Changed
 
 - added `react` and `@storybook/addons` as `peerDependencies`
+- **Breaking**: upgraded storybook@4 to storybook@5 (see [Storybook 5 Migration Guide](https://medium.com/storybookjs/storybook-5-migration-guide-d804b38c739d))
+
+### Removed
+
+- `styled-components` dependency (because the applied styling is way to simple)
 
 ## 2019/03/06 0.3.1
 

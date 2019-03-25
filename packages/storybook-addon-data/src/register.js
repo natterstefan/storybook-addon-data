@@ -1,7 +1,7 @@
 /* eslint-disable react/no-danger */
 import React, { Fragment, useEffect, useState } from 'react'
+import { STORY_CHANGED } from '@storybook/core-events'
 import addons from '@storybook/addons'
-import styled from 'styled-components'
 /**
  * currently assumes you use and import .gql with webpack
  *
@@ -51,11 +51,6 @@ const prismStyle = document.createElement('style')
 prismStyle.innerHTML = globalStyle
 document.body.appendChild(prismStyle)
 
-const NotesPanel = styled.div({
-  margin: 10,
-  overflow: 'auto',
-})
-
 const highlightCode = data => {
   // 2 => space parameter
   // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#Der_space_Parameter
@@ -78,37 +73,39 @@ const highlightCode = data => {
   return Prism.highlight(preparedData, Prism.languages[data.type])
 }
 
-const Notes = ({ api, active, channel }) => {
-  const [data, setData] = useState({})
+const Notes = ({ api, active }) => {
+  // initial states
+  const [data, setData] = useState(null)
   const [text, setText] = useState('')
-  let stopListeningOnStory = null
 
+  // helpers
   const onInit = options => {
     setData(options.data)
     setText(options.parameters)
   }
 
+  const onStoryChange = () => {
+    setData(null)
+    setText('')
+  }
+
+  // previously known as componentDidMount
   useEffect(() => {
     // init prism properly
     Prism.highlightAll()
   }, [])
 
   useEffect(() => {
-    // Listen to the notes and render it.
-    channel.on(ACTIONS.init, onInit)
+    // Listen to certain events and act.
+    api.on(ACTIONS.init, onInit)
 
-    // Clear the current data on every story change.
-    stopListeningOnStory = api.onStory(() => {
-      onInit({})
-    })
+    // Clear (reset) the current data on every story change
+    api.on(STORY_CHANGED, onStoryChange)
 
-    // This is some cleanup tasks when the Data panel is unmounting.
     return () => {
-      if (stopListeningOnStory) {
-        stopListeningOnStory()
-      }
-
-      channel.removeListener(ACTIONS.init, onInit)
+      // cleanup tasks when the Data panel is unmounting
+      api.off(ACTIONS.init, onInit)
+      api.off(STORY_CHANGED, onStoryChange)
     }
   }, [])
 
@@ -134,11 +131,17 @@ const Notes = ({ api, active, channel }) => {
   }
 
   return (
-    <NotesPanel>
+    <div
+      style={{
+        margin: 10,
+        overflow: 'auto',
+      }}
+    >
       {textAfterFormatted && (
         <Fragment>
           <h2>Notes</h2>
           <div dangerouslySetInnerHTML={{ __html: textAfterFormatted }} />
+          {code && <br />}
         </Fragment>
       )}
       {code &&
@@ -150,7 +153,7 @@ const Notes = ({ api, active, channel }) => {
             </pre>
           </Fragment>
         ))}
-    </NotesPanel>
+    </div>
   )
 }
 
@@ -160,8 +163,6 @@ addons.register(CONSTANTS.addonName, api => {
   // Also need to set a unique name to the panel.
   addons.addPanel(CONSTANTS.panelId, {
     title: CONSTANTS.panelName,
-    render: ({ active }) => (
-      <Notes channel={addons.getChannel()} api={api} active={active} />
-    ),
+    render: ({ active }) => <Notes api={api} active={active} />,
   })
 })

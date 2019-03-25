@@ -15,6 +15,8 @@ import dataGql from './data.gql'
 
 import Button from '.'
 
+const onClick = action('clicked')
+
 storiesOf('Button', module)
   // TODO: document available types
   .addDecorator(
@@ -27,15 +29,13 @@ storiesOf('Button', module)
   .add(
     'with text',
     // storyFn
-    () => <Button {...dataJson} onClick={action('clicked')} />,
+    () => <Button {...dataJson} onClick={onClick} />,
     // parameters
     {
-      notes: 'This is a very simple Button and you can click on it.',
+      notes: 'withData: This is a very simple Button and you can click on it.',
     },
   )
-  .add('without description', () => (
-    <Button {...dataJson} onClick={action('clicked')} />
-  ))
+  .add('without description', () => <Button {...dataJson} onClick={onClick} />)
 
 storiesOf('Button', module).add(
   'with withData HoC',
@@ -45,14 +45,15 @@ storiesOf('Button', module).add(
       { name: 'data.js', type: 'javascript', data: dataJs, prop: 'js' }, // available on props.js
       { name: 'data.gql', type: 'graphql', data: dataGql }, // no prop => not available on props
     ],
-    props => <Button {...props.json} onClick={action('clicked')} />,
+    props => <Button {...props.json} onClick={onClick} />,
   ),
   // parameters
   {
-    notes: 'This is a very simple Button and you can click on it.',
+    notes:
+      'withDataWrapper: This is a very simple Button and you can click on it.',
   },
 )
 
 storiesOf('Button', module).add('without data', () => (
-  <Button {...dataJson} onClick={action('clicked')} />
+  <Button {...dataJson} onClick={onClick} />
 ))

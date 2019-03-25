@@ -35,7 +35,8 @@ const withData = data =>
     wrapper: (story, context, { parameters }) => {
       // Our simple API above simply sets the notes parameter to a string,
       // which we send to the channels
-      addons.getChannel().emit(ACTIONS.init, {
+      const channel = addons.getChannel()
+      channel.emit(ACTIONS.init, {
         parameters, // will contain value of "notes" parameter
         data,
         story,
@@ -87,7 +88,8 @@ const withDataWrapper = (data, Story) => ({
   story,
 }) => {
   // init the panel
-  addons.getChannel().emit(ACTIONS.init, {
+  const channel = addons.getChannel()
+  channel.emit(ACTIONS.init, {
     kind,
     parameters: notes,
     data,

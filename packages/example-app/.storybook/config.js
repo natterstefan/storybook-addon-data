@@ -1,12 +1,17 @@
-import { addDecorator, configure } from '@storybook/react'
-import { withOptions } from '@storybook/addon-options'
+import { addParameters, configure } from '@storybook/react'
+import { create } from '@storybook/theming'
 
-// Option defaults:
-addDecorator(
-  withOptions({
-    addonPanelInRight: true,
-  }),
-)
+// storybook options
+addParameters({
+  options: {
+    theme: create({
+      base: 'light',
+      brandTitle: 'natterstefan',
+      brandUrl: 'https://natterstefan.me',
+    }),
+    panelPosition: 'right',
+  },
+})
 
 function loadStories() {
   const req = require.context('../src', true, /\.stories\.js$/)

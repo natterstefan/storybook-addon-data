@@ -1,6 +1,6 @@
 {
   "name": "storybook-addon-data",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Present a component's properties in Storybook.",
   "author": "Stefan Natter (http://natterstefan.me)",
   "license": "Apache-2.0",

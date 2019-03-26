@@ -1,6 +1,6 @@
 {
   "name": "storybook-addon-data-example",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Present a component's properties in Storybook - Example app",
   "author": "Stefan Natter (http://natterstefan.me)",
@@ -24,7 +24,7 @@
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-scripts": "^2.1.8",
-    "storybook-addon-data": "^1.0.0",
+    "storybook-addon-data": "^1.0.1",
     "styled-components": "^4.2.0"
   }
 }

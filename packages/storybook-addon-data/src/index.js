@@ -82,18 +82,15 @@ const withData = data =>
  *
  * @TODO: allow data to be a function, creating the data object dynamically
  */
-const withDataWrapper = (data, Story) => ({
-  kind,
-  parameters: { notes },
-  story,
-}) => {
+const withDataWrapper = (data, Story) => storyParams => {
+  // get notes from story paramaters
+  const { notes } = (storyParams && storyParams.parameters) || {}
+
   // init the panel
   const channel = addons.getChannel()
   channel.emit(ACTIONS.init, {
-    kind,
     parameters: notes,
     data,
-    story,
   })
 
   // we put every data input into a prop off the Story

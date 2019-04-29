@@ -70,8 +70,8 @@ Use `yarn` instead of `npm`, because we rely on [`yarn`'s `workspaces` feature](
 
 ```bash
 yarn # will invoke yarn bootstrap afterwards automatically
-yarn watch # will watch for changes and transpile them with babel
 yarn start # starts storybook (http://localhost:9001)
+yarn build # builds the addon (trigger manually after every change)
 ```
 
 ## Licence

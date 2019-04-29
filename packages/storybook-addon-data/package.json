@@ -5,15 +5,9 @@
   "author": "Stefan Natter (http://natterstefan.me)",
   "license": "Apache-2.0",
   "main": "index.js",
-  "files": [
-    "index.js",
-    "constants.js",
-    "register.js",
-    "vendor"
-  ],
+  "files": ["index.js", "constants.js", "register.js"],
   "scripts": {
     "build": "NODE_ENV=production babel src --ignore */*.test.js,**/*.test.js,*/*.stories.js,**/stories.js -d ./",
-    "prepublish": "npm run build",
     "lint": "eslint src",
     "watch": "NODE_ENV=production babel -d ./ ./src --watch"
   },
@@ -21,16 +15,14 @@
     "type": "git",
     "url": "git+https://github.com/natterstefan/storybook-addon-data.git"
   },
-  "keywords": [
-    "storybook",
-    "storybook-addon"
-  ],
+  "keywords": ["storybook", "storybook-addon"],
   "bugs": {
     "url": "https://github.com/natterstefan/storybook-addon-data/issues"
   },
   "homepage": "https://github.com/natterstefan/storybook-addon-data#readme",
   "dependencies": {
-    "graphql": "^14.1.1"
+    "graphql": "^14.1.1",
+    "react-syntax-highlighter": "^10.2.1"
   },
   "peerDependencies": {
     "@storybook/addons": "^5.0.5",

@@ -35,21 +35,11 @@ import addons from '@storybook/addons'
  * ```
  */
 import { print } from 'graphql/language/printer'
+// syntax highlighter
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
-/**
- * Prism support
- *
- * inspired by
- * - https://github.com/storybooks/addon-jsx/blob/1a95e61290cd2f68bc2909c5bc8f7adc79345097/src/jsx.js
- * - https://codepen.io/eksch/pen/jukqf?editors=1010
- */
-import Prism from './vendor/prism'
-import globalStyle from './vendor/css'
 import { ACTIONS, CONSTANTS } from './constants'
-
-const prismStyle = document.createElement('style')
-prismStyle.innerHTML = globalStyle
-document.body.appendChild(prismStyle)
 
 const highlightCode = data => {
   // 2 => space parameter
@@ -70,7 +60,7 @@ const highlightCode = data => {
       preparedData = data.data
   }
 
-  return Prism.highlight(preparedData, Prism.languages[data.type])
+  return preparedData
 }
 
 const Notes = ({ api, active }) => {
@@ -88,12 +78,6 @@ const Notes = ({ api, active }) => {
     setData(null)
     setText('')
   }
-
-  // previously known as componentDidMount
-  useEffect(() => {
-    // init prism properly
-    Prism.highlightAll()
-  }, [])
 
   useEffect(() => {
     // Listen to certain events and act.
@@ -141,16 +125,20 @@ const Notes = ({ api, active }) => {
         <Fragment>
           <h2>Notes</h2>
           <div dangerouslySetInnerHTML={{ __html: textAfterFormatted }} />
-          {code && <br />}
+          <br />
         </Fragment>
       )}
       {code &&
         code.map((c, idx) => (
           <Fragment key={data[idx].name}>
             <h2>{data[idx].name}</h2>
-            <pre className={`language-${data[idx].type} line-numbers`}>
-              <code dangerouslySetInnerHTML={{ __html: c }} />
-            </pre>
+            <SyntaxHighlighter
+              language={data[idx].type}
+              style={darcula}
+              showLineNumbers
+            >
+              {c}
+            </SyntaxHighlighter>
           </Fragment>
         ))}
     </div>

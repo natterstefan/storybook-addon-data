@@ -74,6 +74,16 @@ yarn start # starts storybook (http://localhost:9001)
 yarn build # builds the addon (trigger manually after every change)
 ```
 
+## Publish
+
+```bash
+$ # prepare changelog, then exec
+$ git commit -m "prepare release x.y.z"
+$ git push
+$ # now increase the versions with lerna
+$ yarn publish # invokes lerna publish
+```
+
 ## Licence
 
 [Apache 2.0](LICENCE)

@@ -19,6 +19,7 @@
     "postinstall": "yarn bootstrap",
     "prebuild": "copyfiles README.md packages/storybook-addon-data",
     "prepublishOnly": "yarn build && copyfiles README.md packages/storybook-addon-data",
+    "publish": "lerna publish",
     "start": "(cd packages/example-app && yarn start)",
     "test": "echo 'INFO: not implemented yet' && exit 1",
     "watch": "lerna run watch --stream --parallel"

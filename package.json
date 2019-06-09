@@ -14,6 +14,9 @@
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build --stream --parallel",
     "clean": "lerna clean",
+    "cy-verify": "cypress verify",
+    "cy-run": "cypress run",
+    "cy-open": "cypress run",
     "lint-js": "eslint ./packages",
     "lint-md": "remark .",
     "postinstall": "yarn bootstrap",
@@ -21,10 +24,9 @@
     "prepublishOnly": "yarn build && copyfiles README.md packages/storybook-addon-data",
     "pretest": "npm run build",
     "publish": "lerna publish",
-    "start": "(cd packages/example-app && yarn start)",
+    "start": "lerna exec --scope storybook-addon-data-example -- npm run start",
     "start-test-server": "start-server-and-test start http://localhost:9001 test",
-    "test": "cypress run",
-    "test-cypress": "cypress open",
+    "test": "npm run cy-run",
     "watch": "lerna run watch --stream --parallel"
   },
   "husky": {

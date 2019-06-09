@@ -35,10 +35,9 @@ import addons from '@storybook/addons'
  * ```
  */
 import { print } from 'graphql/language/printer'
-// syntax highlighter
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
+import Markdown from './components/markdown'
+import CodeBlock from './components/code-block'
 import { ACTIONS, CONSTANTS } from './constants'
 
 const highlightCode = data => {
@@ -63,10 +62,12 @@ const highlightCode = data => {
   return preparedData
 }
 
-const Notes = ({ api, active }) => {
+const Data = ({ api, active }) => {
   // initial states
-  const [data, setData] = useState(null)
-  const [text, setText] = useState('')
+  const initialData = null
+  const initalText = ''
+  const [data, setData] = useState(initialData)
+  const [text, setText] = useState(initalText)
 
   // helpers
   const onInit = options => {
@@ -74,9 +75,10 @@ const Notes = ({ api, active }) => {
     setText(options.parameters)
   }
 
+  // resets data tabs
   const onStoryChange = () => {
-    setData(null)
-    setText('')
+    setData(initialData)
+    setText(initalText)
   }
 
   useEffect(() => {
@@ -98,14 +100,6 @@ const Notes = ({ api, active }) => {
     return null
   }
 
-  let textAfterFormatted = ''
-  try {
-    textAfterFormatted = text ? text.trim().replace(/\n/g, '<br />') : ''
-  } catch (error) {
-    // do nothing right now, just report
-    console.error(error) // eslint-disable-line
-  }
-
   let code = ''
   try {
     code = data.length && data.map(d => highlightCode(d))
@@ -121,24 +115,13 @@ const Notes = ({ api, active }) => {
         overflow: 'auto',
       }}
     >
-      {textAfterFormatted && (
-        <Fragment>
-          <h2>Notes</h2>
-          <div dangerouslySetInnerHTML={{ __html: textAfterFormatted }} />
-          <br />
-        </Fragment>
-      )}
+      <Markdown markdown={text} />
       {code &&
         code.map((c, idx) => (
           <Fragment key={data[idx].name}>
-            <h2>{data[idx].name}</h2>
-            <SyntaxHighlighter
-              language={data[idx].type}
-              style={darcula}
-              showLineNumbers
-            >
-              {c}
-            </SyntaxHighlighter>
+            <Markdown markdown={data[idx].notes} />
+            <CodeBlock name={data[idx].name} code={c} type={data[idx].type} />
+            <br />
           </Fragment>
         ))}
     </div>
@@ -151,6 +134,6 @@ addons.register(CONSTANTS.addonName, api => {
   // Also need to set a unique name to the panel.
   addons.addPanel(CONSTANTS.panelId, {
     title: CONSTANTS.panelName,
-    render: ({ active }) => <Notes api={api} active={active} />,
+    render: ({ active }) => <Data api={api} active={active} />,
   })
 })

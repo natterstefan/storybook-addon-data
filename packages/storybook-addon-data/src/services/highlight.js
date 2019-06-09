@@ -30,8 +30,6 @@ import { print } from 'graphql/language/printer'
  *  ],
  *},
  * ```
- *
- * TODO: document "How to use .gql files" in README.md
  */
 const highlightCode = data => {
   // 2 => space parameter

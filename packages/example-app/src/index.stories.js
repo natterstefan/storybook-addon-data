@@ -2,7 +2,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import withData, { withDataWrapper } from 'storybook-addon-data'
+import withData, { withDataHOC } from 'storybook-addon-data'
 
 import README from '../README.md'
 import README_JSON from './README_JSON.md'
@@ -44,7 +44,7 @@ storiesOf('Button', module)
 
 storiesOf('Button', module).add(
   'with withData HoC',
-  withDataWrapper(
+  withDataHOC(
     [
       // available on props.json
       {

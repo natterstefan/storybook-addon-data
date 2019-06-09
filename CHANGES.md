@@ -13,6 +13,11 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 - The [options parameters](https://storybook.js.org/docs/configurations/options-parameter/)
   can also contain a markdown `notes` property
 
+### Deprecated
+
+- `withDataWrapper` becomes `withDataHOC`, as I find the name more meaningful.
+  Everything else stays the same, eg. same arguments and results.
+
 ## 2019/04/29 1.1.0
 
 ### Added

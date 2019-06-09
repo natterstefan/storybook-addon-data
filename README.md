@@ -122,11 +122,11 @@ similar to like this:
   }
 ```
 
-### withDataWrapper
+### withDataHOC
 
-`withDataWrapper` accepts the same object-array as `withData` does. The only
-difference is, that each `data` provided in any of the objects can be made
-available to the rendered component of the story.
+`withDataHOC` (previously called `withDataWrapper` accepts the same object-array
+as `withData` does. The only difference is, that each `data` provided in any of
+the objects can be made available to the rendered component of the story.
 
 This will look similar to:
 

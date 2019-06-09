@@ -69,7 +69,7 @@ const withData = data =>
  * ```js
  * storiesOf('Button', module).add(
  *  'with withData HoC',
- *  withDataWrapper(
+ *  withDataHOC(
  *    [
  *      { name: 'data.json', type: 'json', data: dataJson, prop: 'json' },
  *    ],
@@ -83,7 +83,7 @@ const withData = data =>
  *
  * TODO: allow data to be a function, creating the data object dynamically
  */
-const withDataWrapper = (data, Story) => storyParams => {
+const withDataHOC = (data, Story) => storyParams => {
   // get notes from story paramaters
   const { notes } = (storyParams && storyParams.parameters) || {}
 
@@ -108,5 +108,29 @@ const withDataWrapper = (data, Story) => storyParams => {
   return <Story {...props} />
 }
 
-export { withData, withDataWrapper }
+const withDataWrapper = (...args) => {
+  /**
+   * TODO: remove in later version
+   * @deprecated
+   *
+   * save a flag on the window obj, so this warning is only printed once in the
+   * storybook app
+   */
+  /* eslint-disable no-underscore-dangle */
+  window._withDataWrapper = window._withDataWrapper || false
+  if (!window._withDataWrapper) {
+    window._withDataWrapper = true
+    // eslint-disable-next-line
+    console.warn(
+      '[Deprecation]',
+      'withDataWrapper is deprecated, got a new name and will be removed in the future.',
+      'Please, use withDataHOC (with the same arguments) instead.',
+    )
+  }
+  /* eslint-enable no-underscore-dangle */
+
+  return withDataHOC(...args)
+}
+
+export { withData, withDataWrapper, withDataHOC }
 export default withData

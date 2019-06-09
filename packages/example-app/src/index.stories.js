@@ -7,10 +7,6 @@ import withData, { withDataWrapper } from 'storybook-addon-data'
 import README from '../README.md'
 import README_JSON from './README_JSON.md'
 
-/**
- * created with
- * - https://prismjs.com/test.html
- */
 import dataJs from './data'
 import dataJson from './data.json'
 import dataYaml from './data.yaml'
@@ -36,7 +32,7 @@ storiesOf('Button', module)
     () => <Button {...dataJson} onClick={onClick} />,
     // parameters
     {
-      // storybook-addon-data supports markdown here
+      // storybook-addon-data supports markdown here as well
       notes: README,
       // or
       // notes: 'withData: This is a very simple Button and you can click on it.',

@@ -44,22 +44,36 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import withData from 'storybook-addon-data'
 
+import README from './README.md'
+import README_JSON from './README_JSON.md'
+
+import dataJs from './data'
 import dataJson from './data.json'
+import dataYaml from './data.yaml'
+import dataGql from './data.gql'
 
 import Card from '.'
 
 storiesOf('Button', module)
   .addDecorator(
     withData([
-      // also supported: javascript and graphql
-      { name: 'data.json', type: 'json', data: dataJson },
+      // list of available types: https://github.com/conorhastings/react-syntax-highlighter/blob/HEAD/AVAILABLE_LANGUAGES_PRISM.MD
+      { name: 'data.json', type: 'json', data: dataJson, notes: README_JSON },
+      { name: 'data.js', type: 'javascript', data: dataJs },
+      // requires `graphql-tag/loader` or a similar webpack loader
+      { name: 'data.gql', type: 'graphql', data: dataGql },
+      // requires `raw-loader` or a similar webpack loader
+      { name: 'data.yaml', type: 'yaml', data: dataYaml },
     ]),
   )
   .add(
     'with text',
     () => <Button {...dataJson} onClick={action('clicked')} />,
     {
-      notes: 'This is a very simple Button and you can click on it.',
+      // storybook-addon-data supports markdown here as well
+      notes: README,
+      // or
+      // notes: 'This is a very simple Button and you can click on it.',
     },
   )
   .add('without description', () => (
@@ -67,7 +81,7 @@ storiesOf('Button', module)
   ))
 ```
 
-And the `data.json`:
+And the `data.json` looks like this:
 
 ```json
 {
@@ -75,40 +89,75 @@ And the `data.json`:
 }
 ```
 
-The result will look similar to (Note: in the example I used also a `.js` and
-`.gql` file):
+The result will look similar to:
 
 ![Example](./static/images/example.png)
 
-## Advanced Usage
+Please note, that [`graphql-tag/loader`](https://github.com/apollographql/graphql-tag#webpack-preprocessing-with-graphql-tagloader)
+(or another webpack loader) is required to make `.gql` files work in
+storybook. Also [`raw-loader`](https://webpack.js.org/loaders/raw-loader/) is
+required for `.yaml` files.
 
-It is further possible to make the data in the Data panel available to the
-component (eg. `<Button />`) with `withDataWrapper`. This will look similar to:
+Take a closer look at the [example`s webpack.config.js](./packages/example-app/.storybook/webpack.config.js)
+for more details.
+
+## Available Methods
+
+### withData
+
+The `withData` [story decorator](https://storybook.js.org/docs/addons/introduction/)
+accepts an object-array as the first and only argument. Each object must look
+similar to like this:
+
+```js
+  {
+    // or any other supported language (required)
+    type: 'json',
+    // the code to show in the addon panel (required)
+    data: dataJson,
+    // title above the code-block (optional)
+    name: 'data.json',
+    // will be rendered above the code block (optional, supports markdown)
+    notes: README_JSON
+  }
+```
+
+### withDataWrapper
+
+`withDataWrapper` accepts the same object-array as `withData` does. The only
+difference is, that each `data` provided in any of the objects can be made
+available to the rendered component of the story.
+
+This will look similar to:
 
 ```js
 storiesOf('Button', module).add(
   'with withData HoC',
   withDataWrapper(
     [
-      // available on props.json
+      // `prop` makes the `data` available on `props.json` in the story
       { name: 'data.json', type: 'json', data: dataJson, prop: 'json' },
+      // also this `data` value is availabe as `props.js` in the story
       { name: 'data.js', type: 'javascript', data: dataJs, prop: 'js' },
-      // no prop => not available on props
+      // no `prop` => not available on props
       { name: 'data.gql', type: 'graphql', data: dataGql },
     ],
+    // props = { json: {...}, js: {...} }
     props => <Button {...props.json} js={props.js} onClick={onClick} />,
   ),
-  // story parameters
-  {
-    notes:
-      'withDataWrapper: This is a very simple Button and you can click on it.',
-  },
 )
 ```
 
-## Available Language Imports
+## Supported Languages
 
 The following languages are supported: [prism languages](https://github.com/conorhastings/react-syntax-highlighter/blob/HEAD/AVAILABLE_LANGUAGES_PRISM.MD).
+
+## Available Syntax Highlighting Styles
+
+As of now, the style is hard coded to `dracula`. This might change in one of the
+future updates.
+
+A list of available styles can be found [here](https://github.com/conorhastings/react-syntax-highlighter/blob/HEAD/AVAILABLE_STYLES_PRISM.MD).
 
 ## Development - Getting started
 
@@ -117,10 +166,10 @@ Use `yarn` instead of `npm`, because we rely on [`yarn`'s `workspaces` feature](
 ```bash
 yarn # will invoke yarn bootstrap afterwards automatically
 yarn start # starts storybook (http://localhost:9001)
-yarn watch # builds the addon with every change
+yarn watch # builds the addon with every change, but a browser request is still required
 ```
 
-Add new dependencies to one of the packages with eg.:
+This is how one can add new dependencies to one of the [packages](./packages):
 
 ```bash
 npx lerna add raw-loader --scope storybook-addon-data

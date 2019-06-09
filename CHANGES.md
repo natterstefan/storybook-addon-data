@@ -4,6 +4,15 @@ All notable changes to this project will be documented here. The format is based
 on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project
 adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Added
+
+- Markdown support: it is now possible to add markdown content as `notes` to
+  both `withData` and `withDataWrapper`
+- The [options parameters](https://storybook.js.org/docs/configurations/options-parameter/)
+  can also contain a markdown `notes` property
+
 ## 2019/04/29 1.1.0
 
 ### Added

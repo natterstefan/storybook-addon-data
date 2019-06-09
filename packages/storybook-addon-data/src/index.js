@@ -14,6 +14,7 @@ import { ACTIONS } from './constants'
  *      { name: 'data.json', type: 'json', data: dataJson },
  *      { name: 'data.js', type: 'javascript', data: dataJs },
  *      { name: 'data.gql', type: 'graphql', data: dataGql },
+ *      { name: 'data.yaml', type: 'yaml', data: dataYaml },
  *    ]),
  *  )
  *  .add(

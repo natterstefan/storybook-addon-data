@@ -35,7 +35,7 @@ import Card from '.'
 storiesOf('Button', module)
   .addDecorator(
     withData([
-       // also supported: javascript and graphql
+      // also supported: javascript and graphql
       { name: 'data.json', type: 'json', data: dataJson },
     ]),
   )
@@ -64,6 +64,10 @@ The result will look similar to (Note: in the example I used also a `.js` and
 
 ![Example](./static/images/example.png)
 
+## Available Language Imports
+
+The following languages are supported: [prism languages](https://github.com/conorhastings/react-syntax-highlighter/blob/HEAD/AVAILABLE_LANGUAGES_PRISM.MD).
+
 ## Development - Getting started
 
 Use `yarn` instead of `npm`, because we rely on [`yarn`'s `workspaces` feature](https://yarnpkg.com/lang/en/docs/workspaces/).
@@ -71,7 +75,13 @@ Use `yarn` instead of `npm`, because we rely on [`yarn`'s `workspaces` feature](
 ```bash
 yarn # will invoke yarn bootstrap afterwards automatically
 yarn start # starts storybook (http://localhost:9001)
-yarn build # builds the addon (trigger manually after every change)
+yarn watch # builds the addon with every change
+```
+
+Add new dependencies to one of the packages with eg.:
+
+```bash
+npx lerna add raw-loader --scope storybook-addon-data
 ```
 
 ## Publish

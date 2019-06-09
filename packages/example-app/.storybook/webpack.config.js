@@ -6,6 +6,10 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'graphql-tag/loader',
       },
+      {
+        test: /\.(yml|yaml)$/i,
+        use: 'raw-loader',
+      },
     ],
   },
 }

@@ -8,8 +8,9 @@ import withData, { withDataWrapper } from 'storybook-addon-data'
  * created with
  * - https://prismjs.com/test.html
  */
-import dataJson from './data.json'
 import dataJs from './data'
+import dataJson from './data.json'
+import dataYaml from './data.yaml'
 // requires https://github.com/apollographql/graphql-tag#webpack-preprocessing-with-graphql-tagloader
 import dataGql from './data.gql'
 
@@ -18,12 +19,12 @@ import Button from '.'
 const onClick = action('clicked')
 
 storiesOf('Button', module)
-  // TODO: document available types
   .addDecorator(
     withData([
       { name: 'data.json', type: 'json', data: dataJson },
       { name: 'data.js', type: 'javascript', data: dataJs },
       { name: 'data.gql', type: 'graphql', data: dataGql },
+      { name: 'data.yaml', type: 'yaml', data: dataYaml },
     ]),
   )
   .add(

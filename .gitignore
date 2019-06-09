@@ -13,6 +13,8 @@ packages/storybook-addon-data/index.js
 packages/storybook-addon-data/constants.js
 packages/storybook-addon-data/register.js
 packages/storybook-addon-data/README.md
+packages/storybook-addon-data/components
+packages/storybook-addon-data/services
 
 # tests
 coverage

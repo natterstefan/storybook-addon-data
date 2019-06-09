@@ -81,7 +81,7 @@ const withData = data =>
  * )
  * ```
  *
- * @TODO: allow data to be a function, creating the data object dynamically
+ * TODO: allow data to be a function, creating the data object dynamically
  */
 const withDataWrapper = (data, Story) => storyParams => {
   // get notes from story paramaters

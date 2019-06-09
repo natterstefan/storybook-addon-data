@@ -1,6 +1,7 @@
 # storybook-addon-data
 
 [![npm version](https://badge.fury.io/js/storybook-addon-data.svg)](https://badge.fury.io/js/storybook-addon-data)
+[![Build Status](https://travis-ci.com/natterstefan/storybook-addon-data.svg?branch=master)](https://travis-ci.com/natterstefan/storybook-addon-data)
 [![Dependencies](https://img.shields.io/david/natterstefan/storybook-addon-data.svg)](https://github.com/natterstefan/storybook-addon-data/blob/master/package.json)
 [![Known Vulnerabilities](https://snyk.io/test/github/natterstefan/storybook-addon-data/badge.svg)](https://snyk.io/test/github/natterstefan/storybook-addon-data)
 [![GitHub license](https://img.shields.io/github/license/natterstefan/storybook-addon-data.svg)](https://github.com/natterstefan/storybook-addon-data/blob/master/LICENCE)

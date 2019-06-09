@@ -8,7 +8,9 @@
   "files": [
     "index.js",
     "constants.js",
-    "register.js"
+    "register.js",
+    "components",
+    "services"
   ],
   "scripts": {
     "build": "NODE_ENV=production babel src --ignore */*.test.js,**/*.test.js,*/*.stories.js,**/stories.js -d ./",

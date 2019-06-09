@@ -1,66 +1,10 @@
-/* eslint-disable react/no-danger */
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { STORY_CHANGED } from '@storybook/core-events'
 import addons from '@storybook/addons'
-/**
- * currently assumes you use and import .gql with webpack
- *
- * Docs: https://github.com/apollographql/graphql-tag
- *
- * Example:
- * ```
- * import dataGql from './data.gql'
- *
- * storiesOf('Button', module)
- *  .addDecorator(
- *    withDataJson([
- *       { name: 'data.gql', type: 'graphql', data: dataGql },
- *    ]),
- *   )
- *  .add(....)
- * ```
- *
- * with the following webpack.config.js
- *
- * ```
- *   module: {
- *    rules: [
- *    {
- *      test: /\.(graphql|gql)$/,
- *      exclude: /node_modules/,
- *      loader: 'graphql-tag/loader',
- *    },
- *  ],
- *},
- * ```
- */
-import { print } from 'graphql/language/printer'
 
 import Markdown from './components/markdown'
-import CodeBlock from './components/code-block'
+import CodeBlocks from './components/code-blocks'
 import { ACTIONS, CONSTANTS } from './constants'
-
-const highlightCode = data => {
-  // 2 => space parameter
-  // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#Der_space_Parameter
-  let preparedData = ''
-
-  switch (data.type) {
-    case 'graphql':
-      // https://github.com/apollographql/graphql-tag/issues/144#issuecomment-360866112
-      preparedData = print(data.data)
-      break
-
-    case 'json':
-      preparedData = JSON.stringify(data.data, null, 2)
-      break
-
-    default:
-      preparedData = data.data
-  }
-
-  return preparedData
-}
 
 const Data = ({ api, active }) => {
   // initial states
@@ -100,14 +44,6 @@ const Data = ({ api, active }) => {
     return null
   }
 
-  let code = ''
-  try {
-    code = data.length && data.map(d => highlightCode(d))
-  } catch (error) {
-    // do nothing right now, just report
-    console.error(error) // eslint-disable-line
-  }
-
   return (
     <div
       style={{
@@ -116,14 +52,7 @@ const Data = ({ api, active }) => {
       }}
     >
       <Markdown markdown={text} />
-      {code &&
-        code.map((c, idx) => (
-          <Fragment key={data[idx].name}>
-            <Markdown markdown={data[idx].notes} />
-            <CodeBlock name={data[idx].name} code={c} type={data[idx].type} />
-            <br />
-          </Fragment>
-        ))}
+      <CodeBlocks data={data} />
     </div>
   )
 }

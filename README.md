@@ -14,6 +14,22 @@ Present a component's properties in Storybook@5.
 npm i storybook-addon-data --save
 ```
 
+Then install the required peerDependency packages, which are listed by the
+command:
+
+```bash
+npm info "storybook-addon-data@latest" peerDependencies
+```
+
+If using npm 5+, use this shortcut:
+
+```bash
+npx install-peerdeps --dev storybook-addon-data
+
+# or
+yarn add storybook-addon-data -D --peer
+```
+
 ## Basic Usage
 
 ```js
@@ -64,6 +80,32 @@ The result will look similar to (Note: in the example I used also a `.js` and
 
 ![Example](./static/images/example.png)
 
+## Advanced Usage
+
+It is further possible to make the data in the Data panel available to the
+component (eg. `<Button />`) with `withDataWrapper`. This will look similar to:
+
+```js
+storiesOf('Button', module).add(
+  'with withData HoC',
+  withDataWrapper(
+    [
+      // available on props.json
+      { name: 'data.json', type: 'json', data: dataJson, prop: 'json' },
+      { name: 'data.js', type: 'javascript', data: dataJs, prop: 'js' },
+      // no prop => not available on props
+      { name: 'data.gql', type: 'graphql', data: dataGql },
+    ],
+    props => <Button {...props.json} js={props.js} onClick={onClick} />,
+  ),
+  // story parameters
+  {
+    notes:
+      'withDataWrapper: This is a very simple Button and you can click on it.',
+  },
+)
+```
+
 ## Available Language Imports
 
 The following languages are supported: [prism languages](https://github.com/conorhastings/react-syntax-highlighter/blob/HEAD/AVAILABLE_LANGUAGES_PRISM.MD).
@@ -87,11 +129,11 @@ npx lerna add raw-loader --scope storybook-addon-data
 ## Publish
 
 ```bash
-$ # prepare changelog, then exec
-$ git commit -m "prepare release x.y.z"
-$ git push
-$ # now increase the versions with lerna
-$ yarn publish # invokes lerna publish
+# prepare changelog, then exec
+git commit -m "prepare release x.y.z"
+git push
+# now increase the versions with lerna
+yarn publish # invokes lerna publish
 ```
 
 ## Licence

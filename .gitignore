@@ -18,3 +18,4 @@ packages/storybook-addon-data/services
 
 # tests
 coverage
+cypress/videos

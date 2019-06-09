@@ -11,8 +11,12 @@ module.exports = {
   overrides: [
     {
       files: ['*.test.js', '*.stories.js'],
+      globals: {
+        cy: true, // cypress
+      },
       rules: {
         'import/no-extraneous-dependencies': 0,
+        'jest/expect-expect': 0, // because we do not use jest, but cypress
         'no-console': 0,
         'react/prop-types': 0,
       },

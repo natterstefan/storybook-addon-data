@@ -4,13 +4,6 @@ module.exports = {
   extends: 'eslint-config-ns',
   rules: {
     'class-methods-use-this': 0,
-    'jest/consistent-test-it': [
-      'error',
-      {
-        fn: 'it',
-        withinDescribe: 'it',
-      },
-    ],
     'import/no-named-as-default': 0,
     'react/prop-types': 0,
     'sort-keys': 0,

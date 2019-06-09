@@ -9,22 +9,22 @@
     "start": "start-storybook -p 9001 -c .storybook --ci"
   },
   "dependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.4.0",
-    "@storybook/addon-actions": "^5.0.5",
-    "@storybook/addon-options": "^5.0.5",
-    "@storybook/addons": "^5.0.5",
-    "@storybook/core-events": "^5.0.5",
-    "@storybook/react": "^5.0.5",
-    "@storybook/theming": "^5.0.5",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
+    "@storybook/addon-actions": "^5.1.3",
+    "@storybook/addon-options": "^5.1.3",
+    "@storybook/addons": "^5.1.3",
+    "@storybook/core-events": "^5.1.3",
+    "@storybook/react": "^5.1.3",
+    "@storybook/theming": "^5.1.3",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-loader": "^8.0.5",
-    "graphql": "^14.1.1",
+    "babel-loader": "^8.0.6",
+    "graphql": "^14.3.1",
     "graphql-tag": "^2.10.1",
-    "react": "^16.8.5",
-    "react-dom": "^16.8.5",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-scripts": "^2.1.8",
     "storybook-addon-data": "^1.1.0",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.3.1"
   }
 }

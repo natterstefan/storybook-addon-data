@@ -37,7 +37,7 @@ const Data = ({ api, active }) => {
       api.off(ACTIONS.init, onInit)
       api.off(STORY_CHANGED, onStoryChange)
     }
-  }, [])
+  }, [api])
 
   if (!data || !active) {
     // do not render when tab is not active

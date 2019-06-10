@@ -22,9 +22,11 @@ install:
 script:
   # for debugging
   - ls -lha node_modules/storybook-addon-data
-  # actual tests
+  # unit tests
+  - yarn test
+  # end-to-end tests
   - yarn build
-  - yarn start-test-server
+  - yarn test-e2e
   # after all tests finish running we need to kill all background jobs
   # (like "npm start &")
   - kill $(jobs -p) || true

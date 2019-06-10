@@ -4,7 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 // TODO: make configurable
 import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
-const DataBlock = ({ code, name, type }) => {
+const CodeBlock = ({ code, name, type }) => {
   if (!code || !type) {
     return null
   }
@@ -19,4 +19,4 @@ const DataBlock = ({ code, name, type }) => {
   )
 }
 
-export default DataBlock
+export default CodeBlock

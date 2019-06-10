@@ -177,11 +177,12 @@ npx lerna add raw-loader --scope storybook-addon-data
 ## Publish
 
 ```bash
-# prepare changelog, then exec
+git checkout master
+# prepare changelog, then push changes to master
 git commit -m "prepare release x.y.z"
 git push
-# now increase the versions with lerna
-yarn publish # invokes lerna publish
+# now increase the versions with lerna and publish the package
+yarn publish-lerna
 ```
 
 ## Licence

@@ -1,6 +1,6 @@
 {
   "name": "storybook-addon-data",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "description": "Present a component's properties in Storybook.",
   "author": "Stefan Natter (http://natterstefan.me)",
   "license": "Apache-2.0",
@@ -45,7 +45,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/natterstefan/storybook-addon-data.git"
+    "url": "https://github.com/natterstefan/storybook-addon-data"
   },
   "workspaces": {
     "packages": [

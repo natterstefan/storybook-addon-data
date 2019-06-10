@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-import highlightCode from '../services/highlight'
+import prepareData from '../services/prepare-data'
 
 import Markdown from './markdown'
 import CodeBlock from './code-block'
@@ -12,7 +12,7 @@ const CodeBlocks = ({ data }) => {
 
   let code = ''
   try {
-    code = data.length && data.map(d => highlightCode(d))
+    code = data.length && data.map(d => prepareData(d))
   } catch (error) {
     // do nothing right now, just report
     console.error(error) // eslint-disable-line

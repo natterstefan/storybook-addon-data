@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 
 import CodeBlocks from '../code-blocks'
 
-describe('components/codeblocks', () => {
+describe('components/CodeBlocks', () => {
   const data = [
     {
       type: 'json',

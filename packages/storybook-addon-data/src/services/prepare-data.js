@@ -1,11 +1,13 @@
 import { print } from 'graphql/language/printer'
 /**
- * currently assumes project uses and imports `.gql` with webpack
+ * # GQL Support
  *
- * Docs: https://github.com/apollographql/graphql-tag
+ * Docs
+ * - https://github.com/apollographql/graphql-tag
  *
  * Example:
- * ```
+ *
+ * ```js
  * import dataGql from './data.gql'
  *
  * storiesOf('Button', module)
@@ -19,21 +21,19 @@ import { print } from 'graphql/language/printer'
  *
  * with the following webpack.config.js
  *
- * ```
+ * ```js
  *   module: {
- *    rules: [
- *    {
- *      test: /\.(graphql|gql)$/,
- *      exclude: /node_modules/,
- *      loader: 'graphql-tag/loader',
- *    },
- *  ],
- *},
+ *     rules: [
+ *       {
+ *         test: /\.(graphql|gql)$/,
+ *         exclude: /node_modules/,
+ *         loader: 'graphql-tag/loader',
+ *       },
+ *     ],
+ *   },
  * ```
  */
-const highlightCode = data => {
-  // 2 => space parameter
-  // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#Der_space_Parameter
+const prepareData = data => {
   let preparedData = ''
 
   switch (data.type) {
@@ -43,6 +43,8 @@ const highlightCode = data => {
       break
 
     case 'json':
+      // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#Der_space_Parameter
+      // 2 => space parameter
       preparedData = JSON.stringify(data.data, null, 2)
       break
 
@@ -54,4 +56,4 @@ const highlightCode = data => {
   return preparedData
 }
 
-export default highlightCode
+export default prepareData

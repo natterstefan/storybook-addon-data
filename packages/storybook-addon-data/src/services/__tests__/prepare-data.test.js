@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 import { print } from 'graphql/language/printer'
 
-import highlight from './highlight'
+import prepareData from '../prepare-data'
 
-describe('services/highlight', () => {
+describe('services/prepareData', () => {
   const obj = {
     data: { test: 1 },
     type: 'json',
@@ -29,15 +29,15 @@ describe('services/highlight', () => {
 
   it('shall return json formatted correctly', () => {
     const prepJson = JSON.stringify(obj.data, null, 2)
-    expect(highlight(obj)).toStrictEqual(prepJson)
+    expect(prepareData(obj)).toStrictEqual(prepJson)
   })
 
   it('shall return graphql formatted correctly', () => {
     const prepJson = print(objGql.data)
-    expect(highlight(objGql)).toStrictEqual(prepJson)
+    expect(prepareData(objGql)).toStrictEqual(prepJson)
   })
 
   it('shall return any other format as is', () => {
-    expect(highlight(objOther)).toStrictEqual('console.log("test")')
+    expect(prepareData(objOther)).toStrictEqual('console.log("test")')
   })
 })

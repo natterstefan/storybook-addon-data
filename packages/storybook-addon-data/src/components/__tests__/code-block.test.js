@@ -4,7 +4,7 @@ import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 import CodeBlock from '../code-block'
 
-describe('components/codeblock', () => {
+describe('components/CodeBlock', () => {
   it('renders null when code is not present', () => {
     const wrapper = shallow(<CodeBlock code={null} type="something" />)
     expect(wrapper.html()).toBeNull()
